@@ -21,7 +21,10 @@ export class UpperComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       firstName: this.fb.control('', Validators.required),
-      address: this.fb.group({}),
+      address: this.fb.group({
+        street: this.fb.control('', Validators.required),
+        city: this.fb.control('', Validators.required),
+      }),
     });
     this.simpleform = this.fb.group({
       firstName: this.fb.control('', Validators.required),
@@ -33,5 +36,7 @@ export class UpperComponent implements OnInit {
     return this.form.get('address') as FormGroup;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.address.get('street').valueChanges.subscribe(console.log)
+  }
 }
